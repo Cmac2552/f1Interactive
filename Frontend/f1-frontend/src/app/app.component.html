@@ -1,4 +1,23 @@
-<div>
-  <span *ngIf = "seb">Hello {{seb.name}}!</span>
+<mat-toolbar>
+  <span>F1-Interactive</span>
+</mat-toolbar>
+<div *ngIf="seb">
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Number</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 </div>
+
 
