@@ -8,11 +8,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {ReactiveFormsModule} from '@angular/forms'
+import {ReactiveFormsModule} from '@angular/forms';
+import { DriverSelectorComponent } from './driver-selector/driver-selector.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DriverSelectorComponent
   ],
   imports: [
     BrowserModule,
