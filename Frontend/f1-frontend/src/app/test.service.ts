@@ -17,8 +17,7 @@ export class TestService {
     return this.http.get<BasicDriver[]>('http://localhost:5000/drivers');
   }
   getImage(){
-    return this.http.get<any>('http://localhost:5000/data');
-    // return this.http.get('/assets/config.json');
+    return this.http.get<any>('http://localhost:5000/data/HAM/VER');
   }
 }
 

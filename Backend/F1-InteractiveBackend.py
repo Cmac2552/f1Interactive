@@ -14,37 +14,31 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['F1-Interactive']
 driversCollection = db['Drivers']
 fastf1.Cache.enable_cache('./cache')
-@app.route("/drivers")
+@app.route("/drivers", methods=['GET'])
 def Drivers():
     drivers = list(driversCollection.find())
     return dumps(drivers)
-@app.route("/data")
-def data():
+@app.route("/data/<driver1>/<driver2>", methods=['GET'])
+def data(driver1, driver2):
     data = fastf1.get_session(2021, 'Spanish Grand Prix', 'Q')
     data.load()
-    ham_lap = data.laps.pick_driver('HAM').pick_fastest()
-    ham_tel = ham_lap.get_car_data().add_distance()
+    driver1_lap = data.laps.pick_driver(driver1).pick_fastest()
+    driver2_lap = data.laps.pick_driver(driver2).pick_fastest()
+    driver1_tel = driver1_lap.get_car_data().add_distance()
+    driver2_tel = driver2_lap.get_car_data().add_distance()
     mer_color = fastf1.plotting.team_color('MER')
+    rbr_color = fastf1.plotting.team_color('RBR')
     fig = Figure()
     ax = fig.subplots()
-    ax.plot(ham_tel['Distance'], ham_tel['Speed'], color=mer_color, label='HAM')
+    ax.plot(driver1_tel['Distance'], driver1_tel['Speed'], color=mer_color, label=driver1)
+    ax.plot(driver2_tel['Distance'], driver2_tel['Speed'], color=rbr_color, label=driver2)
     ax.set_xlabel('Distance in m')
     ax.set_ylabel('Speed in km/h')
     ax.legend()
     buf = BytesIO()
     fig.savefig(buf, format="png")
     buf.seek(0)
-    #may have to convert image to a json
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
-    send = {"image": data}
-    return send
-    # return send_file(buf,  download_name ='logo.png', mimetype='image/png')
-
-
-
-
-
-
-
-    # dfs = ham_lap.to_json(orient = 'columns')
-    # return(dfs)
+    plot = {"image": data}
+    return plot
+    
