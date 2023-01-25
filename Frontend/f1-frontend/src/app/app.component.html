@@ -2,9 +2,10 @@
   <span>F1-Interactive</span>
 </mat-toolbar>
 <div class="mainGrid">
-  <app-driver-selector></app-driver-selector>
-  <app-driver-selector></app-driver-selector>
+  <app-driver-selector (driverSelected)="setDriver1($event)"></app-driver-selector>
+  <app-driver-selector (driverSelected)="setDriver2($event)"></app-driver-selector>
 </div>
+<button mat-button (click)="compare()" >Compare</button>
 <div>
   <img id="myimage" [src]='thumbnail' />
 </div>

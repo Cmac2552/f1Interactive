@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TestService } from '../test.service';
 import {FormControl} from '@angular/forms'
 import { map, Observable, startWith, of } from 'rxjs';
@@ -13,11 +13,11 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 export class DriverSelectorComponent {
   myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   title = 'f1-frontend';
   drivers: BasicDriver[];
   color ="blue";
+  @Output() driverSelected = new EventEmitter<BasicDriver>();
   constructor(private testService: TestService){
 
   }
@@ -40,8 +40,10 @@ export class DriverSelectorComponent {
     
     return this.drivers.map(name => name.lastName).filter(option => option.toLowerCase().includes(filterValue));
   }
-  OnDriverSelected(option: MatAutocompleteSelectedEvent){
-    console.log(option.option.value);
-    this.color = '#'+this.drivers.filter(driver => driver.lastName===option.option.value)[0].teamColor
+  onDriverSelected(option: MatAutocompleteSelectedEvent){
+    let driver = this.drivers.filter(driver => driver.lastName===option.option.value)[0]
+    this.color = '#'+driver.teamColor
+    this.driverSelected.emit(driver)
   }
+
 }

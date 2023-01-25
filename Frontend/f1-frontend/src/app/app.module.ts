@@ -8,6 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button'
 import {ReactiveFormsModule} from '@angular/forms';
 import { DriverSelectorComponent } from './driver-selector/driver-selector.component'
 
@@ -24,7 +25,8 @@ import { DriverSelectorComponent } from './driver-selector/driver-selector.compo
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

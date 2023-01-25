@@ -16,8 +16,8 @@ export class TestService {
   getDrivers(){
     return this.http.get<BasicDriver[]>('http://localhost:5000/drivers');
   }
-  getImage(){
-    return this.http.get<any>('http://localhost:5000/data/HAM/VER');
+  getImage(driver1:BasicDriver, driver2:BasicDriver){
+    return this.http.get<any>('http://localhost:5000/data/'+driver1.abbreviation+'/'+driver2.abbreviation);
   }
 }
 

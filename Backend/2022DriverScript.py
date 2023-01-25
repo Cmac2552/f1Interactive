@@ -17,6 +17,10 @@ for Location in season.Location:
             'lastName': currDriver['LastName'],
             'teamName': currDriver['TeamName'],
             'teamColor': currDriver['TeamColor'],
+            'driverNumber': currDriver['DriverNumber'],
+            'broadcastName': currDriver['BroadcastName'],
+            'fullName': currDriver['FullName'],
+            'abbreviation': currDriver['Abbreviation'],
             'year':2022
         }
         if(collection.count_documents(document)==0):

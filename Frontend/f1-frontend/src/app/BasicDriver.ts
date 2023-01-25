@@ -3,5 +3,10 @@ export interface BasicDriver{
     'lastName': string,
     'teamName': string,
     'teamColor': string,
+    'driverNumber': string,
+    'broadcastName': string,
+    'fullName': string,
+    'abbreviation': string,
     'year':number
+
 }
