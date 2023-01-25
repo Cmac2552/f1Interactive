@@ -16,7 +16,7 @@ export class DriverSelectorComponent {
   filteredOptions: Observable<string[]>;
   title = 'f1-frontend';
   drivers: BasicDriver[];
-  color ="blue";
+  headshot='';
   @Output() driverSelected = new EventEmitter<BasicDriver>();
   constructor(private testService: TestService){
 
@@ -42,7 +42,7 @@ export class DriverSelectorComponent {
   }
   onDriverSelected(option: MatAutocompleteSelectedEvent){
     let driver = this.drivers.filter(driver => driver.lastName===option.option.value)[0]
-    this.color = '#'+driver.teamColor
+    this.headshot = driver.headshotURL
     this.driverSelected.emit(driver)
   }
 

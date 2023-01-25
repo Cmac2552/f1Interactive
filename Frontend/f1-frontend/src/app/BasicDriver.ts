@@ -7,6 +7,7 @@ export interface BasicDriver{
     'broadcastName': string,
     'fullName': string,
     'abbreviation': string,
-    'year':number
+    'year':number,
+    'headshotURL':string
 
 }

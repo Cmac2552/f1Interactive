@@ -10,20 +10,39 @@ for Location in season.Location:
     Locations.append(Location)
     session = fastf1.get_session(2022,Location, 'Race')
     session.load()
-    for driver in session.drivers:
-        currDriver = session.get_driver(driver)
-        document = {
-            'firstName':currDriver['FirstName'],
-            'lastName': currDriver['LastName'],
-            'teamName': currDriver['TeamName'],
-            'teamColor': currDriver['TeamColor'],
-            'driverNumber': currDriver['DriverNumber'],
-            'broadcastName': currDriver['BroadcastName'],
-            'fullName': currDriver['FullName'],
-            'abbreviation': currDriver['Abbreviation'],
-            'year':2022
-        }
-        if(collection.count_documents(document)==0):
-            collection.insert_one(document)
+    for driver in fastf1.api.driver_info(session.api_path):
+        currDriver = fastf1.api.driver_info(session.api_path)[driver]
+        print(fastf1.api.driver_info(session.api_path))
+        try:
+            document = {
+                'firstName':currDriver['FirstName'],
+                'lastName': currDriver['LastName'],
+                'teamName': currDriver['TeamName'],
+                'teamColor': currDriver['TeamColour'],
+                'driverNumber': currDriver['RacingNumber'],
+                'broadcastName': currDriver['BroadcastName'],
+                'fullName': currDriver['FullName'],
+                'abbreviation': currDriver['Tla'],
+                'headshotURL':  currDriver['HeadshotUrl'],
+                'year':2022
+            }
+            if(collection.count_documents(document)==0):
+                collection.insert_one(document)
+        except:
+            document = {
+                'firstName':currDriver['FirstName'],
+                'lastName': currDriver['LastName'],
+                'teamName': currDriver['TeamName'],
+                'teamColor': currDriver['TeamColour'],
+                'driverNumber': currDriver['RacingNumber'],
+                'broadcastName': currDriver['BroadcastName'],
+                'fullName': currDriver['FullName'],
+                'abbreviation': currDriver['Tla'],
+                'year':2022
+            }
+            if(collection.count_documents(document)==0):
+                collection.insert_one(document)
+            continue
+        break
     
 

@@ -1,5 +1,6 @@
 <svg width="100" height="100">
-    <circle cx="50" cy="50" r="40" [ngStyle]="{'fill': color}" />
+    <!-- <circle cx="50" cy="50" r="40" [ngStyle]="{'fill': color}" /> -->
+    <image [attr.xlink:href]="headshot"/>
   </svg>
 <div *ngIf="drivers">
     <form class="example-form">
