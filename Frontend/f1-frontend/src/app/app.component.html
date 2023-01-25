@@ -2,11 +2,14 @@
   <span>F1-Interactive</span>
 </mat-toolbar>
 <div class="mainGrid">
-  <app-driver-selector (driverSelected)="setDriver1($event)"></app-driver-selector>
-  <app-driver-selector (driverSelected)="setDriver2($event)"></app-driver-selector>
+  <app-driver-selector class = "driver1" (driverSelected)="setDriver1($event)"></app-driver-selector>
+  <div></div>
+  <app-driver-selector class = "driver2" (driverSelected)="setDriver2($event)"></app-driver-selector>
 </div>
-<button mat-button (click)="compare()" >Compare</button>
-<div>
+<div class = "dynamic-content">
+  <div>
+    <button mat-button class="compare-button"  (click)="compare()" >Compare</button>
+  </div>
   <img id="myimage" [src]='thumbnail' />
 </div>
 

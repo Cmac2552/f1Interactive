@@ -1,4 +1,16 @@
 .mainGrid{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+.dynamic-content{
+    text-align: center;
+}
+.driver1{
+    text-align: center;
+}
+.driver2{
+    text-align: center;
+}
+.compare-button{
+    margin-bottom: 2%;
 }
