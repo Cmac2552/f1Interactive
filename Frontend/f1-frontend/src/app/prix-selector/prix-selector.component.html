@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>Race Selection</mat-label>
+  <mat-select [(ngModel)]="selectedValue" name="food">
+    <mat-option *ngFor="let race of races" [value]="race.name">
+      {{race.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+ 

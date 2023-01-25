@@ -14,10 +14,12 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['F1-Interactive']
 driversCollection = db['Drivers']
 fastf1.Cache.enable_cache('./cache')
+
 @app.route("/drivers", methods=['GET'])
 def Drivers():
     drivers = list(driversCollection.find())
     return dumps(drivers)
+
 @app.route("/data/<driver1>/<driver2>", methods=['GET'])
 def data(driver1, driver2):
     data = fastf1.get_session(2022, 'Spanish Grand Prix', 'Q')
@@ -52,9 +54,6 @@ def data(driver1, driver2):
     ax.title.set_color('white')
     ax.set_title(f"Fastest Lap Comparison \n "
              f"{data.event['EventName']} {data.event.year} Qualifying",color = "white")
-    # fig.suptitle(f"Fastest Lap Comparison \n "
-    #          f"{data.event['EventName']} {data.event.year} Qualifying")
-    
     buf = BytesIO()
     fig.savefig(buf, format="png")
     buf.seek(0)
@@ -62,3 +61,8 @@ def data(driver1, driver2):
     plot = {"image": data}
     return plot
     
+@app.route("/races", methods=['GET'])
+def Races():
+    racesCollection = db['2022Races']
+    races = list(racesCollection.find())
+    return dumps(races)

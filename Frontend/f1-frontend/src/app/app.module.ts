@@ -10,12 +10,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'
 import {ReactiveFormsModule} from '@angular/forms';
-import { DriverSelectorComponent } from './driver-selector/driver-selector.component'
+import { DriverSelectorComponent } from './driver-selector/driver-selector.component';
+import { PrixSelectorComponent } from './prix-selector/prix-selector.component';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DriverSelectorComponent
+    DriverSelectorComponent,
+    PrixSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,9 @@ import { DriverSelectorComponent } from './driver-selector/driver-selector.compo
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
