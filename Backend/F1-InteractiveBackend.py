@@ -26,8 +26,13 @@ def data(driver1, driver2):
     driver2_lap = data.laps.pick_driver(driver2).pick_fastest()
     driver1_tel = driver1_lap.get_car_data().add_distance()
     driver2_tel = driver2_lap.get_car_data().add_distance()
-    driver1_color = '#'+driversCollection.find_one({"abbreviation":driver1})['teamColor']
-    driver2_color = '#'+driversCollection.find_one({"abbreviation":driver2})['teamColor']
+    dbDriver1 =driversCollection.find_one({"abbreviation":driver1})
+    dbDriver2 = driversCollection.find_one({"abbreviation":driver1})
+    driver1_color = '#'+dbDriver1['teamColor']
+    if dbDriver1['teamName'] == dbDriver2['teamName']:
+        driver2_color = '#FFFFFF'
+    else:
+        driver2_color = '#'+dbDriver2['teamColor']
     fig = Figure(facecolor="#000000")
     ax = fig.subplots()
     ax.plot(driver1_tel['Distance'], driver1_tel['Speed'], color=driver1_color, label=driver1)
