@@ -27,7 +27,7 @@ def data(driver1, driver2):
     driver1_tel = driver1_lap.get_car_data().add_distance()
     driver2_tel = driver2_lap.get_car_data().add_distance()
     dbDriver1 =driversCollection.find_one({"abbreviation":driver1})
-    dbDriver2 = driversCollection.find_one({"abbreviation":driver1})
+    dbDriver2 = driversCollection.find_one({"abbreviation":driver2})
     driver1_color = '#'+dbDriver1['teamColor']
     if dbDriver1['teamName'] == dbDriver2['teamName']:
         driver2_color = '#FFFFFF'
