@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" class ="year">
   <mat-label>Year</mat-label>
   <mat-select [(ngModel)]="selectedYear" (ngModelChange) = "onSelectYear($event)">
     <mat-option *ngFor="let year of years" [value]="year">
@@ -6,11 +6,11 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" class = "race">
   <mat-label>Race Selection</mat-label>
   <mat-select [(ngModel)]="selectedRace" (ngModelChange) = "onSelectRace($event)">
     <mat-option *ngFor="let race of races" [value]="race">
-      {{race.location}} ({{race.name}})
+      {{race.name}} ({{race.location}})
     </mat-option>
   </mat-select>
 </mat-form-field>
