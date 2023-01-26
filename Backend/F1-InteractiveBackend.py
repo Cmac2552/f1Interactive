@@ -7,29 +7,36 @@ from matplotlib.figure import Figure
 import base64
 from io import BytesIO
 import fastf1.plotting
+import DriverScript
+import RaceScript
 
 app = Flask(__name__)
 CORS(app)
 client = MongoClient('mongodb://localhost:27017/')
 db = client['F1-Interactive']
-driversCollection = db['Drivers']
 fastf1.Cache.enable_cache('./cache')
 
-@app.route("/drivers", methods=['GET'])
-def Drivers():
-    drivers = list(driversCollection.find())
+if db['2018Drivers'].count_documents({}) == 0:
+    DriverScript.run()
+
+if db['2018Races'].count_documents({}) == 0:
+    RaceScript.run()
+
+@app.route("/drivers/<year>", methods=['GET'])
+def Drivers(year):
+    drivers = list(db[str(year)+'Drivers'].find())
     return dumps(drivers)
 
-@app.route("/data/<driver1>/<driver2>/<race>", methods=['GET'])
-def data(driver1, driver2, race):
+@app.route("/data/<driver1>/<driver2>/<race>/<year>", methods=['GET'])
+def data(driver1, driver2, race,year):
     data = fastf1.get_session(2022, race, 'Q')
     data.load()
     driver1_lap = data.laps.pick_driver(driver1).pick_fastest()
     driver2_lap = data.laps.pick_driver(driver2).pick_fastest()
     driver1_tel = driver1_lap.get_car_data().add_distance()
     driver2_tel = driver2_lap.get_car_data().add_distance()
-    dbDriver1 =driversCollection.find_one({"abbreviation":driver1})
-    dbDriver2 = driversCollection.find_one({"abbreviation":driver2})
+    dbDriver1 =db[str(year)+'Drivers'].find_one({"abbreviation":driver1})
+    dbDriver2 = db[str(year)+'Drivers'].find_one({"abbreviation":driver2})
     driver1_color = '#'+dbDriver1['teamColor']
     if dbDriver1['teamName'] == dbDriver2['teamName']:
         driver2_color = '#FFFFFF'
@@ -61,8 +68,8 @@ def data(driver1, driver2, race):
     plot = {"image": data}
     return plot
     
-@app.route("/races", methods=['GET'])
-def Races():
-    racesCollection = db['2022Races']
+@app.route("/races/<year>", methods=['GET'])
+def Races(year):
+    racesCollection = db[str(year)+'Races']
     races = list(racesCollection.find())
     return dumps(races)

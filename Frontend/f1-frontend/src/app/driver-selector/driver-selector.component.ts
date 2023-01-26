@@ -19,7 +19,6 @@ export class DriverSelectorComponent {
   headshot='';
   @Output() driverSelected = new EventEmitter<BasicDriver>();
   constructor(private testService: TestService){
-
   }
 
   ngOnInit():void{
@@ -28,8 +27,6 @@ export class DriverSelectorComponent {
       startWith(''),
       map(value => this._filter(value || '')),
     );
-    
-
   }
   
   private loadDrivers(){

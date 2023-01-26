@@ -2,10 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Race } from '../Race';
 import { TestService } from '../test.service';
-interface Food {
-  value: string;
-  viewValue: string;
-}
 @Component({
   selector: 'app-prix-selector',
   templateUrl: './prix-selector.component.html',
@@ -18,10 +14,9 @@ export class PrixSelectorComponent {
   constructor(private testService: TestService){
 
   }
+  
   ngOnInit():void{
     this.loadRaces();
-    
-
   }
 
   private loadRaces(){
