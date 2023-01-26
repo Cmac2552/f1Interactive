@@ -11,8 +11,11 @@
 .driver2{
     text-align: center;
 }
+.race{
+    text-align: center;
+    margin-top: 105px;
+}
 .compare-button{
     margin-bottom: 2%;
     background-color: lightgray;
-    
 }
