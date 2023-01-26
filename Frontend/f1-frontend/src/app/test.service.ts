@@ -14,14 +14,16 @@ export class TestService {
   getTestSeb(){
     return this.http.get<seb>('http://localhost:5000/');
   }
-  getDrivers(){
-    return this.http.get<BasicDriver[]>('http://localhost:5000/drivers');
+  getDrivers(year:Number){
+    return this.http.get<BasicDriver[]>('http://localhost:5000/drivers/'+String(year));
   }
-  getRaces(){
-    return this.http.get<Race[]>('http://localhost:5000/races');
+  getRaces(year:Number){
+    return this.http.get<Race[]>('http://localhost:5000/races/'+String(year));
   }
-  getImage(driver1:BasicDriver, driver2:BasicDriver, race:Race){
-    return this.http.get<any>('http://localhost:5000/data/'+driver1.abbreviation+'/'+driver2.abbreviation+'/'+ race.name);
+  getImage(driver1:BasicDriver, driver2:BasicDriver, race:Race, year:Number){
+    return this.http.get<any>('http://localhost:5000/data/'+driver1.abbreviation+'/'+driver2.abbreviation+'/'+ race.name+'/'+String(year));
   }
 }
+
+
 

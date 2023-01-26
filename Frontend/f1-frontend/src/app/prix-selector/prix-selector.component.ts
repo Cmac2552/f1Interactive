@@ -9,22 +9,29 @@ import { TestService } from '../test.service';
 })
 export class PrixSelectorComponent {
   races: Race[];
-  selectedValue: string;
+  selectedRace: String;
+  years: Number[]= [2022,2021,2020,2019,2018]
+  selectedYear: string;
   @Output() raceSelected = new EventEmitter<Race>();
+  @Output() yearSelected = new EventEmitter<Number>();
   constructor(private testService: TestService){
 
   }
-  
+
   ngOnInit():void{
-    this.loadRaces();
   }
 
-  private loadRaces(){
-    this.testService.getRaces().subscribe(resp =>{this.races = resp;})
+  private loadRaces(year:Number){
+    this.testService.getRaces(year).subscribe(resp =>{this.races = resp;})
   }
 
-  onSelect(race: Race){
+  onSelectRace(race: Race){
     this.raceSelected.emit(race)
+  }
+
+  onSelectYear(year: Number){
+    this.loadRaces(year);
+    this.yearSelected.emit(year)
   }
 
 }

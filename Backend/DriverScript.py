@@ -12,7 +12,7 @@ def run():
         collection = db[str(year)+'Drivers']
         for Location in season.Location:
             Locations.append(Location)
-            session = fastf1.get_session(2022,Location, 'Race')
+            session = fastf1.get_session(year,Location, 'Race')
             session.load()
             for driver in fastf1.api.driver_info(session.api_path):
                 currDriver = fastf1.api.driver_info(session.api_path)[driver]
@@ -29,8 +29,12 @@ def run():
                         'headshotURL':  currDriver['HeadshotUrl'],
                         'year':2022
                     }
-                    if(collection.count_documents(document)==0):
+                    if(collection.count_documents({'firstName':currDriver['FirstName']})==0):
                         collection.insert_one(document)
+                    else:
+                        collection.update_one({'firstName':currDriver['FirstName']},{
+                            "$set":{'headshotURL':currDriver['HeadshotUrl']}
+                        })
                 except:
                     document = {
                         'firstName':currDriver['FirstName'],
@@ -41,11 +45,11 @@ def run():
                         'broadcastName': currDriver['BroadcastName'],
                         'fullName': currDriver['FullName'],
                         'abbreviation': currDriver['Tla'],
+                        'headshotURL':  '../../assets/No_Image_Available.jpg',
                         'year':2022
                     }
-                    if(collection.count_documents(document)==0):
+                    if(collection.count_documents({'firstName':currDriver['FirstName']})==0):
                         collection.insert_one(document)
                     continue
-                break
+                
         
-

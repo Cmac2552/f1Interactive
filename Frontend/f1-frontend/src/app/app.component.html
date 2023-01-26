@@ -2,11 +2,11 @@
   <span>F1-Interactive</span>
 </mat-toolbar>
 <div class="mainGrid">
-  <app-driver-selector class = "driver1" (driverSelected)="setDriver1($event)"></app-driver-selector>
+  <app-driver-selector class = "driver1" (driverSelected)="setDriver1($event)" [year]="year"></app-driver-selector>
   
-  <app-prix-selector class="race" (raceSelected)="setRace($event)"></app-prix-selector>
+  <app-prix-selector class="race" (raceSelected)="setRace($event)" (yearSelected)="setYear($event)"></app-prix-selector>
   
-  <app-driver-selector class = "driver2" (driverSelected)="setDriver2($event)"></app-driver-selector>
+  <app-driver-selector class = "driver2" (driverSelected)="setDriver2($event)" [year]="year"></app-driver-selector>
 </div>
 <div class = "dynamic-content">
   <div>

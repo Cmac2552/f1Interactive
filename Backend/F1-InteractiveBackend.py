@@ -16,11 +16,13 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['F1-Interactive']
 fastf1.Cache.enable_cache('./cache')
 
+if db['2018Races'].count_documents({}) == 0:
+    RaceScript.run()
+    
 if db['2018Drivers'].count_documents({}) == 0:
     DriverScript.run()
 
-if db['2018Races'].count_documents({}) == 0:
-    RaceScript.run()
+
 
 @app.route("/drivers/<year>", methods=['GET'])
 def Drivers(year):
@@ -29,7 +31,7 @@ def Drivers(year):
 
 @app.route("/data/<driver1>/<driver2>/<race>/<year>", methods=['GET'])
 def data(driver1, driver2, race,year):
-    data = fastf1.get_session(2022, race, 'Q')
+    data = fastf1.get_session(int(year), race, 'Q')
     data.load()
     driver1_lap = data.laps.pick_driver(driver1).pick_fastest()
     driver2_lap = data.laps.pick_driver(driver2).pick_fastest()

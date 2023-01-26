@@ -1,9 +1,18 @@
 <mat-form-field appearance="fill">
-  <mat-label>Race Selection</mat-label>
-  <mat-select [(ngModel)]="selectedValue" (ngModelChange) = "onSelect($event)">
-    <mat-option *ngFor="let race of races" [value]="race">
-      {{race.name}}
+  <mat-label>Year</mat-label>
+  <mat-select [(ngModel)]="selectedYear" (ngModelChange) = "onSelectYear($event)">
+    <mat-option *ngFor="let year of years" [value]="year">
+      {{year}}
     </mat-option>
   </mat-select>
 </mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Race Selection</mat-label>
+  <mat-select [(ngModel)]="selectedRace" (ngModelChange) = "onSelectRace($event)">
+    <mat-option *ngFor="let race of races" [value]="race">
+      {{race.location}} ({{race.name}})
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
  

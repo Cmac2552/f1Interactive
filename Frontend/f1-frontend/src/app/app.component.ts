@@ -14,6 +14,7 @@ export class AppComponent {
   driver1: BasicDriver;
   driver2: BasicDriver;
   race: Race;
+  year: Number;
   constructor(private test: TestService, private sanitizer: DomSanitizer){}
   ngOnInit(){
     // this.test.getImage().subscribe((baseImage:any)=>{
@@ -23,19 +24,23 @@ export class AppComponent {
   }
 
   setDriver1(driver1: BasicDriver){
-    this.driver1 = driver1
-    
+    this.driver1 = driver1;
   }
-  setDriver2(driver2: BasicDriver){
-    this.driver2 = driver2
-    
-  }
-  setRace(race: Race){
-    this.race = race
 
+  setDriver2(driver2: BasicDriver){
+    this.driver2 = driver2;
   }
+
+  setRace(race: Race){
+    this.race = race;
+  }
+
+  setYear(year:Number){
+    this.year = year;
+  }
+
   compare(){
-    this.test.getImage(this.driver1, this.driver2, this.race).subscribe((baseImage:any)=>{
+    this.test.getImage(this.driver1, this.driver2, this.race, this.year).subscribe((baseImage:any)=>{
       let objectURL= 'data:image/png;base64,'+baseImage.image;
       this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     })

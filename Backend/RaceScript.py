@@ -11,7 +11,7 @@ def run():
         collection = db[str(year)+'Races']
         for Location in season.Location:
             Locations.append(Location)
-            session = fastf1.get_session(2022,Location, 'Race')
+            session = fastf1.get_session(year,Location, 'Race')
             session.load()
             document ={
                 "location":Location,
