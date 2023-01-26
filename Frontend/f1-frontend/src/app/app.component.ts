@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TestService } from './test.service';
 import { BasicDriver } from './BasicDriver';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Race } from './Race';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ export class AppComponent {
   thumbnail: any;
   driver1: BasicDriver;
   driver2: BasicDriver;
+  race: Race;
   constructor(private test: TestService, private sanitizer: DomSanitizer){}
   ngOnInit(){
     // this.test.getImage().subscribe((baseImage:any)=>{
@@ -22,14 +24,18 @@ export class AppComponent {
 
   setDriver1(driver1: BasicDriver){
     this.driver1 = driver1
-    console.log(driver1)
+    
   }
   setDriver2(driver2: BasicDriver){
     this.driver2 = driver2
-    console.log(driver2)
+    
+  }
+  setRace(race: Race){
+    this.race = race
+
   }
   compare(){
-    this.test.getImage(this.driver1, this.driver2).subscribe((baseImage:any)=>{
+    this.test.getImage(this.driver1, this.driver2, this.race).subscribe((baseImage:any)=>{
       let objectURL= 'data:image/png;base64,'+baseImage.image;
       this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     })

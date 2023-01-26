@@ -1,7 +1,7 @@
 <mat-form-field appearance="fill">
   <mat-label>Race Selection</mat-label>
-  <mat-select [(ngModel)]="selectedValue" name="food">
-    <mat-option *ngFor="let race of races" [value]="race.name">
+  <mat-select [(ngModel)]="selectedValue" (ngModelChange) = "onSelect($event)">
+    <mat-option *ngFor="let race of races" [value]="race">
       {{race.name}}
     </mat-option>
   </mat-select>

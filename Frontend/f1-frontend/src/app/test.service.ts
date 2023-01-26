@@ -20,8 +20,8 @@ export class TestService {
   getRaces(){
     return this.http.get<Race[]>('http://localhost:5000/races');
   }
-  getImage(driver1:BasicDriver, driver2:BasicDriver){
-    return this.http.get<any>('http://localhost:5000/data/'+driver1.abbreviation+'/'+driver2.abbreviation);
+  getImage(driver1:BasicDriver, driver2:BasicDriver, race:Race){
+    return this.http.get<any>('http://localhost:5000/data/'+driver1.abbreviation+'/'+driver2.abbreviation+'/'+ race.name);
   }
 }
 

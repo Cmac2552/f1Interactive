@@ -20,9 +20,9 @@ def Drivers():
     drivers = list(driversCollection.find())
     return dumps(drivers)
 
-@app.route("/data/<driver1>/<driver2>", methods=['GET'])
-def data(driver1, driver2):
-    data = fastf1.get_session(2022, 'Spanish Grand Prix', 'Q')
+@app.route("/data/<driver1>/<driver2>/<race>", methods=['GET'])
+def data(driver1, driver2, race):
+    data = fastf1.get_session(2022, race, 'Q')
     data.load()
     driver1_lap = data.laps.pick_driver(driver1).pick_fastest()
     driver2_lap = data.laps.pick_driver(driver2).pick_fastest()
