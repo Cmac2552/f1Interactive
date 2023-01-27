@@ -33,10 +33,17 @@ def Drivers(year):
 def data(driver1, driver2, race,year,session):
     data = fastf1.get_session(int(year), race, session[0])
     data.load()
-    driver1_lap = data.laps.pick_driver(driver1).pick_fastest()
-    driver2_lap = data.laps.pick_driver(driver2).pick_fastest()
-    driver1_tel = driver1_lap.get_car_data().add_distance()
-    driver2_tel = driver2_lap.get_car_data().add_distance()
+    try:
+        driver1_lap = data.laps.pick_driver(driver1).pick_fastest()
+        driver1_tel = driver1_lap.get_car_data().add_distance()
+        
+    except:
+        return{"error":"../assets/no_driver1_data.PNG"}
+    try:
+        driver2_lap = data.laps.pick_driver(driver2).pick_fastest()
+        driver2_tel = driver2_lap.get_car_data().add_distance()
+    except:
+        return{"error": "../assets/no_driver2_data.PNG"}
     dbDriver1 =db[str(year)+'Drivers'].find_one({"abbreviation":driver1})
     dbDriver2 = db[str(year)+'Drivers'].find_one({"abbreviation":driver2})
     driver1_color = '#'+dbDriver1['teamColor']

@@ -27,8 +27,7 @@ export class AppComponent {
   }
 
   enableCompare(){
-    console.log(this.driverCounter)
-    if(this.driverCounter==2 && this.race && this.year && this.session){
+    if(this.driver1&& this.driver2 && this.race && this.year && this.session){
       console.log('bye')
       this.runIt =false;
     }
@@ -39,13 +38,11 @@ export class AppComponent {
 
   setDriver1(driver1: BasicDriver){
     this.driver1 = driver1;
-    this.driverCounter++;
     this.enableCompare();
   }
 
   setDriver2(driver2: BasicDriver){
     this.driver2 = driver2;
-    this.driverCounter++;
     this.enableCompare();
   }
 
@@ -68,8 +65,13 @@ export class AppComponent {
   compare(){
     this.clicked =true
     this.test.getImage(this.driver1, this.driver2, this.race, this.year, this.session).subscribe((baseImage:any)=>{
-      let objectURL= 'data:image/png;base64,'+baseImage.image;
-      this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      if(!baseImage.error){
+        let objectURL= 'data:image/png;base64,'+baseImage.image;
+        this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+
+      }else{
+        this.thumbnail = baseImage.error
+      }
     })
   }
 }
