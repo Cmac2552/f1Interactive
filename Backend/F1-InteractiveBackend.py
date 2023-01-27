@@ -29,9 +29,9 @@ def Drivers(year):
     drivers = list(db[str(year)+'Drivers'].find())
     return dumps(drivers)
 
-@app.route("/data/<driver1>/<driver2>/<race>/<year>", methods=['GET'])
-def data(driver1, driver2, race,year):
-    data = fastf1.get_session(int(year), race, 'R')
+@app.route("/data/<driver1>/<driver2>/<race>/<year>/<session>", methods=['GET'])
+def data(driver1, driver2, race,year,session):
+    data = fastf1.get_session(int(year), race, session[0])
     data.load()
     driver1_lap = data.laps.pick_driver(driver1).pick_fastest()
     driver2_lap = data.laps.pick_driver(driver2).pick_fastest()
@@ -62,7 +62,7 @@ def data(driver1, driver2, race,year):
     ax.xaxis.label.set_color('white')
     ax.title.set_color('white')
     ax.set_title(f"Fastest Lap Comparison \n "
-             f"{data.event['EventName']} {data.event.year} Race",color = "white")
+             f"{data.event['EventName']} {data.event.year} {session}",color = "white")
     buf = BytesIO()
     fig.savefig(buf, format="png")
     buf.seek(0)

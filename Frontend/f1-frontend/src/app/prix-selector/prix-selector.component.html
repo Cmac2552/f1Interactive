@@ -8,9 +8,17 @@
 </mat-form-field>
 <mat-form-field appearance="fill" class = "race">
   <mat-label>Race Selection</mat-label>
-  <mat-select [(ngModel)]="selectedRace" (ngModelChange) = "onSelectRace($event)">
+  <mat-select [(ngModel)]="selectedRace" (ngModelChange) = "onSelectRace($event)" [disabled]="!raceEnabled">
     <mat-option *ngFor="let race of races" [value]="race">
       {{race.name}} ({{race.location}})
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill" class = "race">
+  <mat-label>Session Selection</mat-label>
+  <mat-select [(ngModel)]="selectedSession" (ngModelChange) = "onSelectSession($event)" [disabled]="!sessionEnabled">
+    <mat-option *ngFor="let session of sessions" [value]="session">
+      {{session}}
     </mat-option>
   </mat-select>
 </mat-form-field>

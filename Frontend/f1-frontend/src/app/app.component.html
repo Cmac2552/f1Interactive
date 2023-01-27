@@ -2,17 +2,22 @@
   <span>F1-Interactive</span>
 </mat-toolbar>
 <div class="mainGrid">
-  <app-driver-selector class = "driver1" (driverSelected)="setDriver1($event)" [year]="year"></app-driver-selector>
+  <app-driver-selector class = "driver1" (driverSelected)="setDriver1($event)" [year]="year" ></app-driver-selector>
   
-  <app-prix-selector class="race" (raceSelected)="setRace($event)" (yearSelected)="setYear($event)"></app-prix-selector>
+  <app-prix-selector class="race" (raceSelected)="setRace($event)" (yearSelected)="setYear($event)" (sessionSelected)="setSession($event)"></app-prix-selector>
   
   <app-driver-selector class = "driver2" (driverSelected)="setDriver2($event)" [year]="year"></app-driver-selector>
 </div>
 <div class = "dynamic-content">
   <div>
-    <button mat-button class="compare-button"  (click)="compare()" >Compare</button>
+    <button mat-button class="compare-button"  (click)="compare()" [disabled] ="runIt" >Compare</button>
   </div>
-  <img id="myimage" [src]='thumbnail' />
+  <div *ngIf="clicked">
+    <img id="myimage" *ngIf="thumbnail; else loading"[src]='thumbnail' />
+    <ng-template #loading>
+      <img src = "../assets/giphy.gif"/>
+    </ng-template>
+  </div>
 </div>
 
 

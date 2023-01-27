@@ -14,33 +14,60 @@ export class AppComponent {
   driver1: BasicDriver;
   driver2: BasicDriver;
   race: Race;
-  year: Number;
+  year: number;
+  session: String;
+  clicked: Boolean;
+  runIt:Boolean
+  driverCounter: number;
   constructor(private test: TestService, private sanitizer: DomSanitizer){}
   ngOnInit(){
-    // this.test.getImage().subscribe((baseImage:any)=>{
-    //   let objectURL= 'data:image/png;base64,'+baseImage.image;
-    //   this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-    // })
+    this.runIt=true;
+    this.driverCounter =0
+  
+  }
+
+  enableCompare(){
+    console.log(this.driverCounter)
+    if(this.driverCounter==2 && this.race && this.year && this.session){
+      console.log('bye')
+      this.runIt =false;
+    }
+    else{
+      this.runIt =true;
+    }
   }
 
   setDriver1(driver1: BasicDriver){
     this.driver1 = driver1;
+    this.driverCounter++;
+    this.enableCompare();
   }
 
   setDriver2(driver2: BasicDriver){
     this.driver2 = driver2;
+    this.driverCounter++;
+    this.enableCompare();
   }
 
   setRace(race: Race){
     this.race = race;
+    this.enableCompare();
   }
 
-  setYear(year:Number){
+  setYear(year:number){
     this.year = year;
+    this.driverCounter =0;
+    this.enableCompare();
+  }
+  
+  setSession(session: String){
+    this.session = session;
+    this.enableCompare();
   }
 
   compare(){
-    this.test.getImage(this.driver1, this.driver2, this.race, this.year).subscribe((baseImage:any)=>{
+    this.clicked =true
+    this.test.getImage(this.driver1, this.driver2, this.race, this.year, this.session).subscribe((baseImage:any)=>{
       let objectURL= 'data:image/png;base64,'+baseImage.image;
       this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     })
