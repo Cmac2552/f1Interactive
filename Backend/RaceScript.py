@@ -4,7 +4,7 @@ def run():
     client = MongoClient('mongodb://localhost:27017/')
     db = client['F1-Interactive']
     fastf1.Cache.enable_cache('./cache')
-    years = [2018,2019,2020,2021,2022]
+    years = [2018,2019,2020,2021,2022,2023]
     for year  in years:
         season = fastf1.get_event_schedule(year, include_testing=False)
         Locations = []

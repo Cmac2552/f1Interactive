@@ -65,6 +65,7 @@ export class AppComponent {
   compare(){
     this.clicked =true
     this.test.getImage(this.driver1, this.driver2, this.race, this.year, this.session).subscribe((baseImage:any)=>{
+      console.log(baseImage)
       if(!baseImage.error){
         let objectURL= 'data:image/png;base64,'+baseImage.image;
         this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);

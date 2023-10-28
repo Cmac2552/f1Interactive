@@ -10,9 +10,9 @@ collection = db['mycollection']
 fastf1.Cache.enable_cache('./cache')
 @app.route("/")
 def hello_world():
-    session = fastf1.get_session(2019, 'Monza', 'Q')
+    session = fastf1.get_session(2023, 'Austrailia', 'Q')
     session.load(telemetry=False, laps=False, weather=False)
-    vettel = session.get_driver('VET')
-    document = {'name': vettel['FirstName']}
+    hamilton = session.get_driver('HAM')
+    document = {'name': hamilton['FirstName']}
     collection.insert_one(document)
-    return {"name":vettel['FirstName']}
+    return {"name":hamilton['FirstName']}

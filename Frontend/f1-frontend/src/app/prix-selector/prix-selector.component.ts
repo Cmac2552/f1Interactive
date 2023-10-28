@@ -10,7 +10,7 @@ import { TestService } from '../test.service';
 export class PrixSelectorComponent {
   races: Race[];
   selectedRace: String;
-  years: number[]= [2022,2021,2020,2019,2018];
+  years: number[]= [2023, 2022, 2021, 2020, 2019, 2018];
   sessions : String[] = ['Race', 'Qualifying'];
   selectedSession:String;
   selectedYear: string;
